@@ -1,8 +1,7 @@
 import { User, Mail, MessageSquare, CheckCircle } from 'lucide-react'
 import { useState } from 'react'
 
-const ENDPOINT =
-  'https://script.google.com/macros/s/AKfycbwAZDeBCwnNdMK6CsWkSqrS3_5DhgNCVMPgMmTvG6UvoOEXm0ZpxhWgIyOOXa4T6qmq/exec'
+const ENDPOINT = import.meta.env.VITE_API_URL
 
 const HireMe = () => {
   const [loading, setLoading] = useState(false)
@@ -16,17 +15,27 @@ const HireMe = () => {
     const data = new FormData(form)
 
     try {
-      await fetch(ENDPOINT, {
+      const body = new URLSearchParams()
+      data.forEach((value, key) => body.append(key, String(value)))
+
+      const response = await fetch(ENDPOINT, {
         method: 'POST',
-        mode: 'no-cors',
-        body: data,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          Accept: 'application/json',
+        },
+        body,
       })
+
+      if (!response.ok) {
+        throw new Error('Request failed')
+      }
 
       form.reset()
       setSuccess(true)
       setTimeout(() => setSuccess(false), 2500)
     } catch {
-      alert('Something went wrong')
+      alert('Message failed. Please try again.')
     } finally {
       setLoading(false)
     }
