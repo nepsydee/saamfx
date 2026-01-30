@@ -33,7 +33,7 @@ const Navigation = ({ onHero, onMyWorks, onHireMe }: Props) => {
     }
     localStorage.setItem('soundEnabled', String(soundEnabled));
     if (soundEnabled) {
-      soundRef.current.play().catch(() => {});
+      soundRef.current.play().catch(() => { });
     } else {
       soundRef.current.pause();
       soundRef.current.currentTime = 0;
@@ -47,27 +47,27 @@ const Navigation = ({ onHero, onMyWorks, onHireMe }: Props) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 px-6 py-4 md:px-8 transition-opacity duration-700 ${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50  px-6 py-4 md:px-8 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
     >
       <div className="flex items-center justify-between">
 
         {/* Logo */}
-<button
-  onClick={onHero}
-  className="flex items-center"
-  aria-label="Go to top"
->
-  <img
-    src="/logo.png"
-    alt="SAAM.FX"
-    className="h-8 md:h-10 w-auto hover:opacity-70 transition-opacity duration-300 cursor-pointer"
-    draggable={false}
-  />
-</button>
+        <button
+          onClick={onHero}
+          className="flex items-center "
+          aria-label="Go to top"
+          
+        >
+          <img
+            src="/logo.png"
+            alt="SAAM.FX"
+            className="h-8 md:h-10 w-auto hover:opacity-70 transition-opacity duration-300 cursor-pointer"
+            draggable={false}
+          />
+        </button>
         {/* Center Nav */}
-        <div className="hidden md:flex items-center gap-10 text-xs font-medium tracking-[0.15em] text-white uppercase">
+        <div className="hidden md:flex items-center gap-10 text-xs font-medium tracking-[0.15em] text-white uppercase pl-14">
           <button onClick={onHero} className="group relative">
             <span className="group-hover:-translate-y-2 group-hover:opacity-0 transition-all duration-300 inline-block">   I</span>
             <span className="absolute left-0 top-0 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 text-[#c084fc]">I</span>
