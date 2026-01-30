@@ -33,7 +33,8 @@ export default function ObjModel({ url }: { url: string }) {
     const center = box.getCenter(new THREE.Vector3())
 
     model.position.sub(center)
-    model.scale.setScalar(0.9 / size)
+    // Increased scale factor for better visibility in production
+    model.scale.setScalar(2.5 / size)
 
     model.traverse((child: any) => {
       if (child.isMesh) {

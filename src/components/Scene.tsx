@@ -6,10 +6,10 @@ export default function Scene({ children }: { children: React.ReactNode }) {
   return (
     <Canvas
       camera={{
-        position: [0, 0, 4], // moved back
-        fov: 45,
-        near: 0.01,          // 🔥 critical fix
-        far: 100,            // 🔥 critical fix
+        position: [0, 0, 4], // closer for better visibility
+        fov: 50, // wider field of view
+        near: 0.01,
+        far: 100,
       }}
       gl={{
         powerPreference: 'high-performance',
