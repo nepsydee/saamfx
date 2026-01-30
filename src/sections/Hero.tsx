@@ -124,13 +124,5 @@ const Hero = () => {
     </section>
   );
 };
-const scrollToWorks = () => {
-  document.getElementById("works")?.scrollIntoView({ behavior: "smooth" });
-};
-
-const scrollToContact = () => {
-  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-};
-
 
 export default Hero;
