@@ -10,7 +10,7 @@ const HireMe = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-
+    console.log(ENDPOINT)
     const form = e.currentTarget
     const data = new FormData(form)
 
