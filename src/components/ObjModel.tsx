@@ -34,7 +34,7 @@ export default function ObjModel({ url }: { url: string }) {
 
     model.position.sub(center)
     // Increased scale factor for better visibility in production
-    model.scale.setScalar(2.5 / size)
+    model.scale.setScalar(5 / size)
 
     model.traverse((child: any) => {
       if (child.isMesh) {
