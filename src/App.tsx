@@ -1,32 +1,50 @@
-import { useEffect } from 'react';
-import Navigation from './components/Navigation';
-import Hero from './sections/Hero';
-import './App.css';
+import { useRef } from 'react'
+import Navigation from './components/Navigation'
+import Hero from './sections/Hero'
+import MyWorks from './sections/MyWorks'
+import HireMe from './sections/HireMe'
+import './App.css'
 
 function App() {
-  useEffect(() => {
-    const cleanURL = () => {
-      // Force URL to show only "/#"
-      window.history.replaceState(null, '', '/');
-    };
+  const heroRef = useRef<HTMLDivElement>(null)
+  const worksRef = useRef<HTMLDivElement>(null)
+  const hireRef = useRef<HTMLDivElement>(null)
 
-    window.addEventListener('hashchange', cleanURL);
-    window.addEventListener('popstate', cleanURL);
+  const scrollToHero = () => {
+    heroRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
-    return () => {
-      window.removeEventListener('hashchange', cleanURL);
-      window.removeEventListener('popstate', cleanURL);
-    };
-  }, []);
+  const scrollToWorks = () => {
+    worksRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const scrollToHire = () => {
+    hireRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
-      <Navigation />
-      <main>
-        <Hero />
+    <div className="min-h-screen w-full bg-[#0a0a0a] overflow-x-hidden">
+      <Navigation
+        onHero={scrollToHero}
+        onMyWorks={scrollToWorks}
+        onHireMe={scrollToHire}
+      />
+
+      <main className="relative w-full overflow-x-hidden">
+        <div ref={heroRef}>
+          <Hero />
+        </div>
+
+        <div ref={worksRef}>
+          <MyWorks />
+        </div>
+
+        <div ref={hireRef}>
+          <HireMe />
+        </div>
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
