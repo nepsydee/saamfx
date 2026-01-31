@@ -26,7 +26,10 @@ export default function MyWorks() {
     if (prefersReducedMotion) return
 
     const observer = new IntersectionObserver(
-      ([entry]) => (entry.isIntersecting ? video.play().catch(() => {}) : video.pause()),
+      ([entry]) =>
+        entry.isIntersecting
+          ? video.play().catch(() => {})
+          : video.pause(),
       { threshold: 0.25 }
     )
 
@@ -54,15 +57,12 @@ export default function MyWorks() {
       <div className="absolute inset-0 bg-black/65" />
 
       <div className="relative z-10">
-
         {/* ===== TOP MARQUEE ===== */}
         <div className="mb-14 w-screen overflow-hidden -mx-4 sm:-mx-6 md:-mx-10 lg:-mx-12">
           <div className="marquee-track flex w-[200%]">
             {[...Array(2)].map((_, i) => (
               <div key={i} className="flex w-screen justify-around">
-                <span className="marquee-text">
-                  DESIGN • MOTION • DEVELOPMENT
-                </span>
+                <span className="marquee-text">DESIGN • MOTION • DEVELOPMENT</span>
                 <span className="marquee-text">
                   DESIGNER & VIDEO EDITOR CRAFTING DISTINCTIVE VISUALS
                 </span>
@@ -94,7 +94,10 @@ export default function MyWorks() {
         <div className="max-w-7xl mx-auto mb-24">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-12">
             {imageWorks.map((item, i) => (
-              <div key={i} className="group relative flex justify-center hover:scale-[1.06] transition">
+              <div
+                key={i}
+                className="group relative flex justify-center hover:scale-[1.06] transition"
+              >
                 <div className="relative w-full h-[320px] flex items-center justify-center">
                   <div className="absolute w-[260px] h-[260px] rounded-full bg-[#c084fc]/45 blur-3xl opacity-0 group-hover:opacity-100 transition" />
                   <img
@@ -118,17 +121,20 @@ export default function MyWorks() {
           <div className="marquee-track flex w-[200%]">
             {[...Array(2)].map((_, i) => (
               <div key={i} className="flex w-screen justify-around">
-                <span className="marquee-text">READY TO START YOUR NEXT PROJECT?</span>
-                <span className="marquee-text">AVAILABLE FOR PROJECTS & COLLABORATIONS</span>
+                <span className="marquee-text">
+                  READY TO START YOUR NEXT PROJECT?
+                </span>
+                <span className="marquee-text">
+                  AVAILABLE FOR PROJECTS & COLLABORATIONS
+                </span>
               </div>
             ))}
           </div>
         </div>
-
       </div>
 
-      {/* STYLES */}
-      <style jsx>{`
+      {/* STYLES (Vite-safe) */}
+      <style>{`
         .marquee-track {
           animation: marquee 22s linear infinite;
         }
@@ -146,8 +152,12 @@ export default function MyWorks() {
         }
 
         @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
         }
       `}</style>
     </section>
