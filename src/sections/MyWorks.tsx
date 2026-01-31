@@ -106,7 +106,7 @@ export default function MyWorks() {
                     className="relative z-10 max-h-[260px] object-contain group-hover:scale-[1.15] transition drop-shadow-[0_30px_55px_rgba(0,0,0,0.75)]"
                   />
                   <div className="absolute bottom-8 opacity-0 group-hover:opacity-100 transition">
-                    <span className="text-white font-extrabold tracking-[0.28em] text-lg drop-shadow-[0_0_18px_rgba(255,255,255,0.6)]">
+                    <span className="text-white font-extrabold tracking-[0.28em] text-lg">
                       {item.title}
                     </span>
                   </div>
@@ -140,15 +140,18 @@ export default function MyWorks() {
         }
 
         .marquee-text {
-          font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+          font-size: clamp(0.85rem, 2.4vw, 1.35rem);
           font-weight: 800;
-          letter-spacing: 0.32em;
+          letter-spacing: clamp(0.12em, 0.6vw, 0.32em);
           white-space: nowrap;
           color: white;
-          text-shadow:
-            0 0 10px rgba(255,255,255,0.9),
-            0 0 26px rgba(255,255,255,0.45),
-            0 0 48px rgba(255,255,255,0.25);
+          padding: 0 1rem;
+        }
+
+        @media (max-width: 640px) {
+          .marquee-text {
+            letter-spacing: 0.14em;
+          }
         }
 
         @keyframes marquee {
