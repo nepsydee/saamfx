@@ -22,7 +22,9 @@ export default function MyWorks() {
     const section = sectionRef.current
     if (!video || !section) return
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
     if (prefersReducedMotion) return
 
     const observer = new IntersectionObserver(
@@ -59,15 +61,19 @@ export default function MyWorks() {
       <div className="relative z-10">
         {/* ===== TOP MARQUEE ===== */}
         <div className="mb-14 w-screen overflow-hidden -mx-4 sm:-mx-6 md:-mx-10 lg:-mx-12">
-          <div className="marquee-track flex w-[200%]">
-            {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex w-screen justify-around">
-                <span className="marquee-text">DESIGN • MOTION • DEVELOPMENT</span>
-                <span className="marquee-text">
-                  DESIGNER & VIDEO EDITOR CRAFTING DISTINCTIVE VISUALS
-                </span>
-              </div>
-            ))}
+          <div className="marquee-track">
+            <div className="marquee-row">
+              <span className="marquee-text">DESIGN • MOTION • DEVELOPMENT</span>
+              <span className="marquee-text">
+                DESIGNER & VIDEO EDITOR CRAFTING DISTINCTIVE VISUALS
+              </span>
+            </div>
+            <div className="marquee-row">
+              <span className="marquee-text">DESIGN • MOTION • DEVELOPMENT</span>
+              <span className="marquee-text">
+                DESIGNER & VIDEO EDITOR CRAFTING DISTINCTIVE VISUALS
+              </span>
+            </div>
           </div>
         </div>
 
@@ -118,25 +124,41 @@ export default function MyWorks() {
 
         {/* ===== BOTTOM MARQUEE ===== */}
         <div className="mt-10 w-screen overflow-hidden -mx-4 sm:-mx-6 md:-mx-10 lg:-mx-12">
-          <div className="marquee-track flex w-[200%]">
-            {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex w-screen justify-around">
-                <span className="marquee-text">
-                  READY TO START YOUR NEXT PROJECT?
-                </span>
-                <span className="marquee-text">
-                  AVAILABLE FOR PROJECTS & COLLABORATIONS
-                </span>
-              </div>
-            ))}
+          <div className="marquee-track">
+            <div className="marquee-row">
+              <span className="marquee-text">
+                READY TO START YOUR NEXT PROJECT?
+              </span>
+              <span className="marquee-text">
+                AVAILABLE FOR PROJECTS & COLLABORATIONS
+              </span>
+            </div>
+            <div className="marquee-row">
+              <span className="marquee-text">
+                READY TO START YOUR NEXT PROJECT?
+              </span>
+              <span className="marquee-text">
+                AVAILABLE FOR PROJECTS & COLLABORATIONS
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* STYLES (Vite-safe) */}
+      {/* STYLES */}
       <style>{`
         .marquee-track {
+          display: flex;
+          width: max-content;
           animation: marquee 22s linear infinite;
+        }
+
+        .marquee-row {
+          display: flex;
+          align-items: center;
+          gap: clamp(2rem, 6vw, 6rem);
+          padding-right: clamp(2rem, 6vw, 6rem);
+          flex-shrink: 0;
         }
 
         .marquee-text {
@@ -145,13 +167,6 @@ export default function MyWorks() {
           letter-spacing: clamp(0.12em, 0.6vw, 0.32em);
           white-space: nowrap;
           color: white;
-          padding: 0 1rem;
-        }
-
-        @media (max-width: 640px) {
-          .marquee-text {
-            letter-spacing: 0.14em;
-          }
         }
 
         @keyframes marquee {
