@@ -99,7 +99,6 @@ const Hero = () => {
           }}
         >
           SAAM.FX
-          <sup className="text-[0.3em] align-super ml-1">®</sup>
         </h1>
       </div>
 
