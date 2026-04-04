@@ -17,6 +17,10 @@ export default function MyWorks() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const sectionRef = useRef<HTMLElement | null>(null)
 
+  // 🔊 SOUND POOL (instant playback)
+  const soundPoolRef = useRef<HTMLAudioElement[]>([])
+  const soundIndexRef = useRef(0)
+
   useEffect(() => {
     const video = videoRef.current
     const section = sectionRef.current
@@ -39,6 +43,39 @@ export default function MyWorks() {
     return () => observer.disconnect()
   }, [])
 
+  // 🔊 PRELOAD MULTIPLE AUDIO INSTANCES
+  useEffect(() => {
+    const poolSize = 6
+    const pool: HTMLAudioElement[] = []
+
+    for (let i = 0; i < poolSize; i++) {
+      const audio = new Audio('/tick.mp3') // 👉 your sound file
+      audio.preload = 'auto'
+      audio.volume = 0.4
+      pool.push(audio)
+    }
+
+    soundPoolRef.current = pool
+  }, [])
+
+  // 🔊 INSTANT PLAY FUNCTION
+  const playHoverSound = () => {
+    const pool = soundPoolRef.current
+    if (!pool.length) return
+
+    const sound = pool[soundIndexRef.current]
+
+    sound.currentTime = 0
+
+    // 🎧 slight variation (feels premium)
+    sound.playbackRate = 0.95 + Math.random() * 0.1
+
+    sound.play().catch(() => {})
+
+    soundIndexRef.current =
+      (soundIndexRef.current + 1) % pool.length
+  }
+
   return (
     <section
       ref={sectionRef}
@@ -59,7 +96,7 @@ export default function MyWorks() {
       <div className="absolute inset-0 bg-black/65" />
 
       <div className="relative z-10">
-        {/* ===== TOP MARQUEE ===== */}
+        {/* TOP MARQUEE */}
         <div className="mb-14 w-screen overflow-hidden -mx-4 sm:-mx-6 md:-mx-10 lg:-mx-12">
           <div className="marquee-track">
             <div className="marquee-row">
@@ -102,6 +139,7 @@ export default function MyWorks() {
             {imageWorks.map((item, i) => (
               <div
                 key={i}
+                onMouseEnter={playHoverSound}
                 className="group relative flex justify-center hover:scale-[1.06] transition"
               >
                 <div className="relative w-full h-[320px] flex items-center justify-center">
@@ -122,7 +160,7 @@ export default function MyWorks() {
           </div>
         </div>
 
-        {/* ===== BOTTOM MARQUEE ===== */}
+        {/* BOTTOM MARQUEE */}
         <div className="mt-10 w-screen overflow-hidden -mx-4 sm:-mx-6 md:-mx-10 lg:-mx-12">
           <div className="marquee-track">
             <div className="marquee-row">
