@@ -49,7 +49,7 @@ export default function MyWorks() {
     const pool: HTMLAudioElement[] = []
 
     for (let i = 0; i < poolSize; i++) {
-      const audio = new Audio('/tick.mp3') // 👉 your sound file
+      const audio = new Audio('/tick.wav') // 👉 your sound file
       audio.preload = 'auto'
       audio.volume = 0.4
       pool.push(audio)
